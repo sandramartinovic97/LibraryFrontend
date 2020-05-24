@@ -1,1 +1,5 @@
-<app-book-item></app-book-item>
+<div class="row">
+    <div class="col">
+        <app-book-item *ngFor="let bookElement of books" [book]="bookElement"></app-book-item>
+    </div>
+</div>

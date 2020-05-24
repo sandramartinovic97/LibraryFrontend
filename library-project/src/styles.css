@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.card {
+    display:inline-block;
+    margin-inline-start: 30px;
+    padding: 5px;
+}
+
+img {
+    float: center;
+    width:  150px;
+    height: 250px;
+    object-fit: cover;
+}
