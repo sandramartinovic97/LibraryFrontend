@@ -8,6 +8,6 @@ export class BookService {
     private books: Book[] = [];
 
     fetchBooks() {
-        return this.httpClient.get<Book[]>('http://localhost:8083/books')
+        return this.httpClient.get<Book[]>('http://localhost:8083/books');
     }
 }
