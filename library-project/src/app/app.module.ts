@@ -10,6 +10,8 @@ import { BookDetailsComponent } from './books/book-details/book-details.componen
 import { BookItemComponent } from './books/book-list/book-item/book-item.component';
 import { BookService } from './books/book.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,15 @@ import { HttpClientModule } from '@angular/common/http';
     BooksComponent,
     BookListComponent,
     BookDetailsComponent,
-    BookItemComponent
+    BookItemComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [BookService],
+  providers: [BookService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
