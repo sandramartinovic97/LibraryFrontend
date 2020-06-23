@@ -11,5 +11,4 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

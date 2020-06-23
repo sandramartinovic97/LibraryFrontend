@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Book } from '../../book.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-item',
@@ -8,9 +9,12 @@ import { Book } from '../../book.model';
 })
 export class BookItemComponent implements OnInit {
   @Input() book: Book;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  goToDetails(pageName: string, id) {
+    this.router.navigate([`${pageName}`, id]);
+  }
 }
