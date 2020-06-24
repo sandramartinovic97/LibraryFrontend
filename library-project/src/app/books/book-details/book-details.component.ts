@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class BookDetailsComponent implements OnInit {
   id: number;
   book: Book;
+  books: Book[];
   
   constructor(private bookService: BookService,
              private route: ActivatedRoute,
@@ -30,5 +31,16 @@ export class BookDetailsComponent implements OnInit {
     this.router.navigate([`details`,this.id, `edit`]);
   }
 
-  onDeleteBook(){}
+  onDeleteBook(){
+    this.bookService.deleteBook(this.book.id).subscribe(
+      a => { this.bookService.bookChanged.next();
+    });
+    this.bookService.fetchBooks().subscribe(
+      (book: Book[]) => {
+        this.books = book;
+      }
+    );
+    this.bookService.bookChanged.next(this.books);
+    this.router.navigate(['/books']);
+  }
 }

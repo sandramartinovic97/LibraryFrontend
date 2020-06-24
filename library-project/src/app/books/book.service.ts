@@ -16,18 +16,22 @@ export class BookService {
 
     public getBookById(id: number) {
         console.log(id);
-        return this.httpClient.get<Book>('http://localhost:8083/books/'+id);
+        const token = localStorage.getItem('token');
+        return this.httpClient.get<Book>('http://localhost:8083/books/'+id, { headers: new HttpHeaders().set('Authorization', token) } );
     }
     public addBook(book: Book) {
-        return this.httpClient.post('http://localhost:8083/books', book);
+        const token = localStorage.getItem('token');
+        return this.httpClient.post('http://localhost:8083/books', book, { headers: new HttpHeaders().set('Authorization', token) });
       }
     
-      updateBook(id: number, newBook: Book) {
-        return this.httpClient.put('http://localhost:8083/books/' + id, newBook);
+    public  updateBook(id: number, newBook: Book) {
+      const token = localStorage.getItem('token');
+      return this.httpClient.put('http://localhost:8083/books/' + id, newBook, { headers: new HttpHeaders().set('Authorization', token) });
       }
     
-      deleteBook(id: number) {
-        return this.httpClient.delete('http://localhost:8083/books/' + id);
+    public  deleteBook(id: number) {
+      const token = localStorage.getItem('token');
+      return this.httpClient.delete('http://localhost:8083/books/' + id, { headers: new HttpHeaders().set('Authorization', token) });
     
       }
 }

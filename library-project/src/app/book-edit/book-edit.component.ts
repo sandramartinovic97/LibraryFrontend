@@ -25,10 +25,7 @@ export class BookEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getUserByToken().subscribe(user => {
-      console.log(user);
-      this.userService.emitUser(user);
-    })
+
     this.route.params
     .subscribe(
       (params: Params) => {
