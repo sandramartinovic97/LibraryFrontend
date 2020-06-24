@@ -13,9 +13,11 @@ import { BookService } from './books/book.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './auth/auth.service';
-import { FormsModule } from '@angular/forms';
 import { BookOrderComponent } from './book-order/book-order.component';
 import { OrderDialogComponent } from './book-order/order-dialog/order-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BookEditComponent } from './book-edit/book-edit.component';
+import { DropdownDirective } from './books/book-details/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -27,14 +29,17 @@ import { OrderDialogComponent } from './book-order/order-dialog/order-dialog.com
     BookItemComponent,
     AuthComponent,
     BookOrderComponent,
-    OrderDialogComponent
+    OrderDialogComponent,
+    BookEditComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [BookService, AuthService],
   bootstrap: [AppComponent]
