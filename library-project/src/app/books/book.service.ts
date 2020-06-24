@@ -13,8 +13,6 @@ export class BookService {
 
     public getBookById(id: number) {
         console.log(id);
-        const headers = new HttpHeaders()
-      .append('Access-Control-Allow-Origin', '*');
-        return this.httpClient.get<Book>('http://localhost:8083/books/'+id, {headers});
+        return this.httpClient.get<Book>('http://localhost:8083/books/'+id);
     }
 }

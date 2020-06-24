@@ -14,7 +14,7 @@ export class BookItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goToDetails(pageName: string, id) {
+  goToDetails(pageName: string, id: number) {
     this.router.navigate([`${pageName}`, id]);
   }
 }
