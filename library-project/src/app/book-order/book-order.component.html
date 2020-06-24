@@ -1,0 +1,59 @@
+<form *ngIf = 'createOrder' (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="row">
+    <div class="col-sm-5 form-group">
+      <label for="name">Date</label>
+      <input
+        type="date"
+        id="date"
+        class="form-control"
+        name="orderDate"
+        ngModel
+        required
+      >
+    </div>
+    <div class="col-sm-2 form-group">
+        <button
+        mat-raised-button color="primary"
+        type="submit"
+        [disabled]='!f.valid'>Confirm order</button>
+      <button mat-raised-button color="primary" type="button" (click)="onClear()">Cancel</button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button mat-raised-button color="primary" type="button"  (click)="confirmOrder()">Create order with these books</button>
+    <button mat-raised-button color="primary" type="button"  (click)="onDeleteAll()">Delete all from cart</button>
+  </div>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table #table  [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="bookName">
+      <th mat-header-cell *matHeaderCellDef  >Book name </th>
+      <td mat-cell *matCellDef="let element">  {{element}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="itemPrice">
+      <th mat-header-cell *matHeaderCellDef > Book price </th>
+      <td mat-cell *matCellDef="let element"> {{element}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="itemQuantity">
+      <th mat-header-cell *matHeaderCellDef > Book quantity</th>
+      <td mat-cell *matCellDef="let element"> {{element}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deleteFromCart">
+      <th mat-header-cell *matHeaderCellDef> Delete from cart</th>
+      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)='deleteOneFromCart(element)'>Delete from cart</button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+

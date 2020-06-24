@@ -11,13 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 export class BookDetailsComponent implements OnInit {
   id: number;
   book: Book;
-  
+
   constructor(private bookService: BookService,
-             private route: ActivatedRoute) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.id= parseInt(params.get('id'));
+      // tslint:disable-next-line:radix
+      this.id = parseInt(params.get('id'));
       this.bookService.getBookById(this.id).subscribe(book => {
         this.book = book;
         console.log(book);

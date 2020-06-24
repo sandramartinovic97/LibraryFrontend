@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './auth/auth.service';
 import { FormsModule } from '@angular/forms';
+import { BookOrderComponent } from './book-order/book-order.component';
+import { OrderDialogComponent } from './book-order/order-dialog/order-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +25,13 @@ import { FormsModule } from '@angular/forms';
     BookListComponent,
     BookDetailsComponent,
     BookItemComponent,
-    AuthComponent
+    AuthComponent,
+    BookOrderComponent,
+    OrderDialogComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule

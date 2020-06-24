@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Hi!</h1>
+<div mat-dialog-content>
+  <p>How many articles do you want to order?</p>
+  <mat-form-field>
+    <mat-label>Quantity</mat-label>
+    <input matInput type="number" pattern="^[1-9]+[0-9]*$" [(ngModel)]="itemQuantity">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">No Thanks</button>
+  <button mat-button mat-dialog-close (click)="confirm(itemQuantity)" *ngIf='itemQuantity>0'   cdkFocusInitial>Ok</button>
+</div>
