@@ -3,12 +3,20 @@
     <div class="card-body">
         <p class="card-text"><strong>{{book?.bookName}}</strong></p>
         <p class="card-text">{{book?.bookDescription}}</p>
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+        
+            <div class="btn-group" appDropdown>
+
+                <button
+                  type="button"
+                  class="btn btn-primary dropdown-toggle">
+                  Manage <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a style="cursor: pointer;" (click)="onEditBook()">Edit book</a></li>
+                  <li><a style="cursor: pointer;" (click)="onDeleteBook()">Delete book</a></li>
+                </ul>
             </div>
-        </div>
+      
 
         <router-outlet></router-outlet>
     </div>
