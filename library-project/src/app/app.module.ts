@@ -18,6 +18,7 @@ import { OrderDialogComponent } from './book-order/order-dialog/order-dialog.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { DropdownDirective } from './books/book-details/dropdown.directive';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DropdownDirective } from './books/book-details/dropdown.directive';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule
   ],
   providers: [BookService, AuthService],
   bootstrap: [AppComponent]
