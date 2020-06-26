@@ -48,7 +48,7 @@
 
     <ng-container matColumnDef="deleteFromCart">
       <th mat-header-cell *matHeaderCellDef> Delete from cart</th>
-      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)='deleteOneFromCart(element)'>Delete from cart</button> </td>
+      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)='deleteOneFromCart()'>Delete from cart</button> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

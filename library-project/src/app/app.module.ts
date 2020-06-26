@@ -18,6 +18,7 @@ import { OrderDialogComponent } from './book-order/order-dialog/order-dialog.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { DropdownDirective } from './books/book-details/dropdown.directive';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -59,6 +60,7 @@ import { OrderItemService } from './book-order/orderItem.service';
     MatButtonModule,
     MatDatepickerModule,
     MatInputModule,
+    MatFormFieldModule
   ],
   providers: [BookService, AuthService, OrderItemService],
   bootstrap: [AppComponent]
