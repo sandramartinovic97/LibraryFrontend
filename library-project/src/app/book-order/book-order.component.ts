@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class BookOrderComponent implements OnInit {
 
   // dataSource = new MatTableDataSource<ArticleAmount>();
-  dataSource = new MatTableDataSource();
+  // dataSource = new MatTableDataSource();
   displayedColumns: string[] = ['bookName', 'itemPrice', 'itemQuantity', 'deleteFromCart'];
 
   createOrder = false;

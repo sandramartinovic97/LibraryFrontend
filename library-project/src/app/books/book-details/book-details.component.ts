@@ -12,17 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class BookDetailsComponent implements OnInit {
   id: number;
   book: Book;
-<<<<<<< HEAD
+  books: Book[];
 
   constructor(private bookService: BookService,
-              private route: ActivatedRoute) { }
-=======
-  books: Book[];
-  
-  constructor(private bookService: BookService,
-             private route: ActivatedRoute,
-             private router: Router) { }
->>>>>>> bed8ab19096cc5c766da85891bd768dd5cb360ad
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -34,14 +28,11 @@ export class BookDetailsComponent implements OnInit {
       });
     });
   }
-<<<<<<< HEAD
-}
-=======
-  onEditBook(){
-    this.router.navigate([`details`,this.id, `edit`]);
+  onEditBook() {
+    this.router.navigate([`details`, this.id, `edit`]);
   }
 
-  onDeleteBook(){
+  onDeleteBook() {
     this.bookService.deleteBook(this.book.id).subscribe(
       a => { this.bookService.bookChanged.next();
     });
@@ -54,4 +45,3 @@ export class BookDetailsComponent implements OnInit {
     this.router.navigate(['/books']);
   }
 }
->>>>>>> bed8ab19096cc5c766da85891bd768dd5cb360ad

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-auth',
@@ -11,7 +12,8 @@ export class AuthComponent implements OnInit {
 
   isLoginMode = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -21,9 +23,14 @@ export class AuthComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     const value = form.value;
-    this.authService.login(value.username, value.password).subscribe(response=> {
+    this.authService.login(value.username, value.password).subscribe(response => {
       console.log(response);
-      localStorage.setItem('token', "Bearer " + response.token);
+      localStorage.setItem('token', 'Bearer' + response.token);
+      // ja sam dodala
+      this.userService.getUserByToken().subscribe(user => {
+        console.log(user);
+        this.userService.emitUser(user);
+      });
     });
     form.reset();
   }

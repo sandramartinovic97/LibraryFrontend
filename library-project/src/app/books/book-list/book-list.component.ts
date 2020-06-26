@@ -9,14 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-<<<<<<< HEAD
   books: Book[];
-  constructor(private bookService: BookService) { }
-=======
-  books: Book[]
   constructor(private bookService: BookService,
-    private router: Router) { }
->>>>>>> bed8ab19096cc5c766da85891bd768dd5cb360ad
+              private router: Router) { }
 
   ngOnInit(): void {
     this.bookService.fetchBooks().subscribe(books => {
