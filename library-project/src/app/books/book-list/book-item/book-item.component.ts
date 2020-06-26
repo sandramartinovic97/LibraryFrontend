@@ -1,24 +1,42 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Book } from '../../book.model';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderDialogComponent } from '../../../book-order/order-dialog/order-dialog.component';
+import { OrderItem } from '../../../book-order/orderItem.model';
+import { UserService } from '../../../auth/user.service';
+import { User } from '../../../auth/user.model';
+import { OrderItemService } from '../../../book-order/orderItem.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-book-item',
   templateUrl: './book-item.component.html',
   styleUrls: ['./book-item.component.css']
 })
-export class BookItemComponent implements OnInit {
+export class BookItemComponent implements OnInit, OnDestroy {
   @Input() book: Book;
 
-  // za dijalog
+  // za dijalog i dodavanje orderItem
   itemQuantity: number;
+  orderItemToAdd: OrderItem;
+  loggedUser: User;
+  subscription: Subscription;
+
 
   constructor(private router: Router,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private userService: UserService,
+              private orderItemService: OrderItemService) { }
 
   ngOnInit(): void {
+    /*this.subscription = this.userService.user.subscribe(loggedClient => {
+
+      console.log(loggedClient);
+      if (loggedClient) {
+        this.loggedUser = loggedClient;
+      }
+    });*/
   }
 
   goToDetails(pageName: string, id: number) {
@@ -35,9 +53,23 @@ export class BookItemComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(itemQuantityDialog => {
         this.itemQuantity = itemQuantityDialog;
-        // za sad samo ispisem a posle cemo uraditi sa njom sta treba
         console.log(this.itemQuantity);
+
+        /* if (this.loggedUser != null) {
+          this.orderItemToAdd = new OrderItem (book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, this.loggedUser.id);
+          this.orderItemService.addOrderItem(this.orderItemToAdd);
+          console.log(this.orderItemToAdd);
+        }*/
+
+        // ako koristimo subscription ove 3 linije nisu potrebne
+        this.orderItemToAdd = new OrderItem (book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, 2);
+        this.orderItemService.addOrderItem(this.orderItemToAdd);
+        console.log(this.orderItemToAdd);
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    // this.subscription.unsubscribe();
   }
 }

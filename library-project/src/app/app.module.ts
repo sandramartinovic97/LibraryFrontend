@@ -20,6 +20,20 @@ import { BookEditComponent } from './book-edit/book-edit.component';
 import { DropdownDirective } from './books/book-details/dropdown.directive';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { OrderItemService } from './book-order/orderItem.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,9 +55,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatInputModule,
     MatFormFieldModule
   ],
-  providers: [BookService, AuthService],
+  providers: [BookService, AuthService, OrderItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

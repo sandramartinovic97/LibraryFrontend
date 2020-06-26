@@ -13,10 +13,10 @@ export class BookDetailsComponent implements OnInit {
   id: number;
   book: Book;
   books: Book[];
-  
+
   constructor(private bookService: BookService,
-             private route: ActivatedRoute,
-             private router: Router) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -28,11 +28,11 @@ export class BookDetailsComponent implements OnInit {
       });
     });
   }
-  onEditBook(){
-    this.router.navigate([`details`,this.id, `edit`]);
+  onEditBook() {
+    this.router.navigate([`details`, this.id, `edit`]);
   }
 
-  onDeleteBook(){
+  onDeleteBook() {
     this.bookService.deleteBook(this.book.id).subscribe(
       a => { this.bookService.bookChanged.next();
     });
