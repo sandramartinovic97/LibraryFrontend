@@ -12,8 +12,10 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   getUserByToken() {
-      const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    if (token != null) {
       return this.httpClient.get<User>('http://localhost:8083/customer/token', { headers: new HttpHeaders().set('Authorization', token) });
+    }
   }
 
   emitUser(user: User) {

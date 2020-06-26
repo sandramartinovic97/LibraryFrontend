@@ -63,8 +63,10 @@ export class BookItemComponent implements OnInit, OnDestroy {
 
         // ako koristimo subscription ove 3 linije nisu potrebne
         this.orderItemToAdd = new OrderItem (book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, 2);
-        this.orderItemService.addOrderItem(this.orderItemToAdd);
-        console.log(this.orderItemToAdd);
+        this.orderItemService.addOrderItem(this.orderItemToAdd).subscribe(response=> {
+          console.log(this.orderItemToAdd);
+        });
+        
       });
     }
   }

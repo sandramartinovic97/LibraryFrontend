@@ -33,6 +33,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { OrderItemService } from './book-order/orderItem.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { OrderItemService } from './book-order/orderItem.service';
     MatButtonModule,
     MatDatepickerModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    RouterModule
   ],
   providers: [BookService, AuthService, OrderItemService],
   bootstrap: [AppComponent]
