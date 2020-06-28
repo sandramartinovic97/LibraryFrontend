@@ -110,7 +110,7 @@ export class BookEditComponent implements OnInit {
       this.bookForm.value.year,
       this.bookForm.value.price,
       this.bookForm.value.quantity,
-      this.bookForm.value.cover
+      this.bookForm.value.imageURL
     );
     if (this.editMode) {
       this.bookService.updateBook(this.id, newBook).subscribe(a => { this.bookService.bookChanged.next(); });

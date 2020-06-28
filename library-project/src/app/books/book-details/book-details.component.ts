@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Book } from '../book.model';
 import { BookService } from '../book.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
