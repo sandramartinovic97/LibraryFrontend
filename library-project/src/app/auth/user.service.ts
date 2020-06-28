@@ -13,6 +13,7 @@ export class UserService {
 
   getUserByToken() {
     const token = localStorage.getItem('token');
+    console.log(token);
     if (token != null) {
       return this.httpClient.get<User>('http://localhost:8083/customer/token', { headers: new HttpHeaders().set('Authorization', token) });
     }
@@ -24,5 +25,9 @@ export class UserService {
 
   getLoggedInUser() {
     return this.user.asObservable();
+  }
+
+  registerUser(user: User) {
+    return this.httpClient.post('http://localhost:8083/customer/register', user)
   }
 }
