@@ -34,6 +34,8 @@ import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { OrderItemService } from './book-order/orderItem.service';
 import { RouterModule } from '@angular/router';
+ 
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -62,9 +64,10 @@ import { RouterModule } from '@angular/router';
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
-    RouterModule
+    RouterModule,
+    ToastrModule.forRoot()
   ],
-  providers: [BookService, AuthService, OrderItemService],
+  providers: [BookService, AuthService, OrderItemService, ToastrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

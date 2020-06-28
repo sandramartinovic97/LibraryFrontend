@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { User } from './user.model';
 import { Role } from './role.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-auth',
@@ -16,7 +17,7 @@ export class AuthComponent implements OnInit {
   isLoginMode = true;
 
   constructor(private authService: AuthService,
-    private userService: UserService, private router: Router) { }
+    private userService: UserService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -47,6 +48,7 @@ export class AuthComponent implements OnInit {
       this.userService.registerUser(newUser).subscribe(response => {
         form.reset();
         this.isLoginMode = true;
+        this.toastr.success("Successfully registered!", "Success");
         this.ngOnInit();
       }, error=> {
         console.log(error);
