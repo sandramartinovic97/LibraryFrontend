@@ -1,11 +1,11 @@
 import { Book } from './book.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject,BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class BookService {
-    bookChanged = new Subject<Book[]>();
+    bookChanged = new BehaviorSubject<Book[]>(null);
     constructor(private httpClient: HttpClient) { }
     private books: Book[] = [];
 

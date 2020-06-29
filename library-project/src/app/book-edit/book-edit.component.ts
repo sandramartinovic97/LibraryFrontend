@@ -113,12 +113,12 @@ export class BookEditComponent implements OnInit {
       this.bookForm.value.imageURL
     );
     if (this.editMode) {
-      this.bookService.updateBook(this.id, newBook).subscribe(a => { this.bookService.bookChanged.next(); });
+      this.bookService.updateBook(this.id, newBook).subscribe();
     
  
     } else {
        console.log(newBook);
-       this.bookService.addBook(newBook).subscribe(a => { this.bookService.bookChanged.next(); });
+       this.bookService.addBook(newBook).subscribe();
     }
     this.bookService.fetchBooks().subscribe(
       (books: Book[]) => {
