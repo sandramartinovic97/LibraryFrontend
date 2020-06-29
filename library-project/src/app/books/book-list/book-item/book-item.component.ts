@@ -30,13 +30,12 @@ export class BookItemComponent implements OnInit, OnDestroy {
               private orderItemService: OrderItemService) { }
 
   ngOnInit(): void {
-    /*this.subscription = this.userService.user.subscribe(loggedClient => {
+    this.subscription = this.userService.user.subscribe(loggedClient => {
 
-      console.log(loggedClient);
       if (loggedClient) {
         this.loggedUser = loggedClient;
       }
-    });*/
+    });
   }
 
   goToDetails(pageName: string, id: number) {
@@ -53,25 +52,18 @@ export class BookItemComponent implements OnInit, OnDestroy {
 
       dialogRef.afterClosed().subscribe(itemQuantityDialog => {
         this.itemQuantity = itemQuantityDialog;
-        console.log(this.itemQuantity);
 
-        /* if (this.loggedUser != null) {
-          this.orderItemToAdd = new OrderItem (book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, this.loggedUser.id);
-          this.orderItemService.addOrderItem(this.orderItemToAdd);
-          console.log(this.orderItemToAdd);
-        }*/
-
-        // ako koristimo subscription ove 3 linije nisu potrebne
-        this.orderItemToAdd = new OrderItem (book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, 2);
-        this.orderItemService.addOrderItem(this.orderItemToAdd).subscribe(response=> {
-          console.log(this.orderItemToAdd);
-        });
-        
+        if (this.loggedUser != null && this.itemQuantity != null) {
+          this.orderItemToAdd = new OrderItem (null, book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, this.loggedUser.id);
+          this.orderItemService.addOrderItem(this.orderItemToAdd).subscribe(response => {
+            console.log(this.orderItemToAdd);
+          });
+        }
       });
     }
   }
 
   ngOnDestroy(): void {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

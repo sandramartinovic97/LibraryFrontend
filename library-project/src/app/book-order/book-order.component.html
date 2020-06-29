@@ -1,4 +1,4 @@
-<!--<form *ngIf = 'createOrder' (ngSubmit)="onSubmit(f)" #f="ngForm">
+<form *ngIf = 'createOrder' (ngSubmit)="onSubmit(f)" #f="ngForm">
   <div class="row">
     <div class="col-sm-5 form-group">
       <label for="name">Date</label>
@@ -24,36 +24,40 @@
 <div class="row">
   <div class="col-xs-12">
     <button mat-raised-button color="primary" type="button"  (click)="confirmOrder()">Create order with these books</button>
-    <button mat-raised-button color="primary" type="button"  (click)="onDeleteAll()">Delete all from cart</button>
   </div>
 </div>
-<!--
+
 <div class="mat-elevation-z8">
   <table mat-table #table  [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="bookName">
       <th mat-header-cell *matHeaderCellDef  >Book name </th>
-      <td mat-cell *matCellDef="let element">  {{element}} </td>
+      <td mat-cell *matCellDef="let element">  {{element.bookDto.bookName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="itemPrice">
-      <th mat-header-cell *matHeaderCellDef > Book price </th>
-      <td mat-cell *matCellDef="let element"> {{element}} </td>
+      <th mat-header-cell *matHeaderCellDef > Price per book </th>
+      <td mat-cell *matCellDef="let element"> {{element.bookDto.bookPrice}} </td>
     </ng-container>
 
     <ng-container matColumnDef="itemQuantity">
       <th mat-header-cell *matHeaderCellDef > Book quantity</th>
-      <td mat-cell *matCellDef="let element"> {{element}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.itemQuantity}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="priceForAll">
+      <th mat-header-cell *matHeaderCellDef > Price for order item</th>
+      <td mat-cell *matCellDef="let element"> {{element.itemPrice}} </td>
     </ng-container>
 
     <ng-container matColumnDef="deleteFromCart">
       <th mat-header-cell *matHeaderCellDef> Delete from cart</th>
-      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)='deleteOneFromCart()'>Delete from cart</button> </td>
+      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" (click)='deleteOneFromCart(element)'>Delete from cart</button> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>-->
+</div>
 
 
