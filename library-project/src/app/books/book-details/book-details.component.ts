@@ -25,7 +25,6 @@ export class BookDetailsComponent implements OnInit {
       this.id = parseInt(params.get('id'));
       this.bookService.getBookById(this.id).subscribe(book => {
         this.book = book;
-        console.log(book);
       });
     });
   }

@@ -65,7 +65,8 @@ import { BookOrderService } from './book-order/bookOrder.service';
     MatInputModule,
     MatFormFieldModule,
     RouterModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatSelectModule
   ],
   providers: [BookService, AuthService, OrderItemService, ToastrService, BookOrderService],
   bootstrap: [AppComponent]

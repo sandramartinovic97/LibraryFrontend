@@ -1,9 +1,18 @@
 <div class="row">
     <div class="col-xs-12">
-      <button class="btn btn-success" (click)="onNewBook()">Add new book</button>
+        <button class="btn btn-success" (click)="onNewBook()">Add new book</button>
     </div>
-  </div>
-  <hr>
+</div>
+<hr>
+<mat-form-field>
+    <mat-label>Search book by genre</mat-label>
+    <mat-select (selectionChange)="changeGenre($event.value)">
+      <mat-option *ngFor="let genre of genres" [value]="genre.id">
+        {{genre.genreName}}
+      </mat-option>
+      <mat-option (click)="noGenreSelected()">Get all books</mat-option>
+    </mat-select>
+  </mat-form-field>
 <div class="row">
     <div class="col">
         <app-book-item *ngFor="let bookElement of books" [book]="bookElement"></app-book-item>

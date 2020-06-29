@@ -3,6 +3,9 @@ import { Book } from '../book.model';
 import { BookService } from '../book.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Genre } from '../genre.model';
+import { GenreService } from '../genre.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-list',
@@ -12,15 +15,18 @@ import { Subscription } from 'rxjs';
 export class BookListComponent implements OnInit, OnDestroy {
   books: Book[];
   subscription: Subscription;
+  genres: Genre[];
 
-  constructor(private bookService: BookService,
-              private router: Router) { }
+  constructor(private bookService: BookService, private router: Router, private genreService: GenreService, private toastrService: ToastrService) { }
 
 
   ngOnInit(): void {
+    this.genreService.getAllGenres().subscribe(genres => {
+      this.genres = genres;
+    })
     this.subscription = this.bookService.bookChanged.subscribe(
       (books: Book[]) =>
-      this.books = books
+        this.books = books
     );
     this.bookService.fetchBooks().subscribe(books => {
       this.books = books;
@@ -31,6 +37,20 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  changeGenre(value) {
+    this.bookService.getBookByGenreId(value).subscribe(books => {
+      this.books = books;
+    }, error => {
+      this.toastrService.error("Could not find book with selected genre", "Error");
+    })
+  }
+
+  noGenreSelected() {
+    this.bookService.fetchBooks().subscribe(books=> {
+      this.books = books;
+    })
   }
 
 }
