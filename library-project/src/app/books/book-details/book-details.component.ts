@@ -34,9 +34,7 @@ export class BookDetailsComponent implements OnInit {
   }
 
   onDeleteBook() {
-    this.bookService.deleteBook(this.book.id).subscribe(
-      a => { this.bookService.bookChanged.next();
-    });
+    this.bookService.deleteBook(this.book.id).subscribe();
     this.bookService.fetchBooks().subscribe(
       (book: Book[]) => {
         this.books = book;
