@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BookItemComponent implements OnInit, OnDestroy {
   @Input() book: Book;
+  isUserLoggedIn: boolean;
 
   // za dijalog i dodavanje orderItem
   itemQuantity: number;
@@ -33,7 +34,7 @@ export class BookItemComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.userService.user.subscribe(loggedClient => {
-
+      
       if (loggedClient) {
         this.loggedUser = loggedClient;
       }
