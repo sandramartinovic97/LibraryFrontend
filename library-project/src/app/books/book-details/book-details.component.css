@@ -2,3 +2,12 @@
     height: 400px;
     width: 250px;
 }
+
+.button1 {
+    background-color: black; 
+    color:blanchedalmond
+}
+.buttonH:hover {
+    background-color: red; 
+    color: white;
+  }
