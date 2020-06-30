@@ -17,7 +17,7 @@ import { BookOrder } from './bookOrder.model';
 })
 export class BookOrderComponent implements OnInit, OnDestroy {
 
-  orderItemByCustomer: OrderItem[] =  [];
+  orderItemByCustomer: OrderItem[] = [];
   loggedUser: User;
   userSubscription: Subscription;
   dataSource = new MatTableDataSource<OrderItem>();
@@ -31,10 +31,10 @@ export class BookOrderComponent implements OnInit, OnDestroy {
   createOrder = false;
   @ViewChild('f') orderForm: NgForm;
 
-  constructor( private orderItemService: OrderItemService,
-               private userService: UserService,
-               private toastMess: ToastrService,
-               private bookOrderService: BookOrderService) { }
+  constructor(private orderItemService: OrderItemService,
+    private userService: UserService,
+    private toastMess: ToastrService,
+    private bookOrderService: BookOrderService) { }
 
   ngOnInit(): void {
 
@@ -42,7 +42,7 @@ export class BookOrderComponent implements OnInit, OnDestroy {
 
       if (loggedClient) {
         this.loggedUser = loggedClient;
-        this.orderItemService.getOrderItemsByCustomerId(this.loggedUser.id).subscribe( response => {
+        this.orderItemService.getOrderItemsByCustomerId(this.loggedUser.id).subscribe(response => {
 
           for (const orderItem of response) {
             if (orderItem.bookOrderDto == null) {
@@ -55,7 +55,7 @@ export class BookOrderComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.listSubscription = this.orderItemService.listOrderItem.subscribe( response => {
+    this.listSubscription = this.orderItemService.listOrderItem.subscribe(response => {
       this.dataSource.data = this.orderItemByCustomer;
     });
   }
@@ -85,11 +85,11 @@ export class BookOrderComponent implements OnInit, OnDestroy {
         this.toastMess.success('Order created successfully', "Success"); 
 
         for (const orderItem of this.orderItemByCustomer) {
-            orderItem.bookOrderDto = response;
-            orderItem.bookOrderDto.customerDto = this.loggedUser;
-            this.orderItemService.putOrderItem(orderItem.id, orderItem).subscribe( responseOrderItem => {
-                console.log('Updated order item');
-            });
+          orderItem.bookOrderDto = response;
+          orderItem.bookOrderDto.customerDto = this.loggedUser;
+          this.orderItemService.putOrderItem(orderItem.id, orderItem).subscribe(responseOrderItem => {
+            console.log('Updated order item');
+          });
         }
 
         this.onClear();
@@ -103,7 +103,7 @@ export class BookOrderComponent implements OnInit, OnDestroy {
 
   // brisanje jedne kljige iz liste
   deleteOneFromCart(orderItem: OrderItem) {
-    this.orderItemService.deleteOrderItem(orderItem.id).subscribe( response => {
+    this.orderItemService.deleteOrderItem(orderItem.id).subscribe(response => {
       console.log('Deleted');
       this.orderItemByCustomer.splice(this.orderItemByCustomer.lastIndexOf(orderItem), 1);
       this.priceOfOrder -= orderItem.itemPrice;

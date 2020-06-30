@@ -2,11 +2,33 @@
     <img class="card-img-top" [src]="book.bookCover" height="100%">
     <div class="card-body">
         <p class="card-text" style="height: 8rem;"><strong>{{book.bookName}}</strong></p>
+        <!-- <button (click)="addToFavourites(book)">Favourites</button> -->
+        
+        <button class="btn btn-sm"(click)="addToFavourites(book)" *ngIf="selected">Add to favourite
+<!-- 
+           <mat-icon
+              *ngIf="selected"
+              aria-label="Example icon-button with a heart icon">
+              favorite
+            </mat-icon>
+          
+            <mat-icon
+              *ngIf="!selected"
+              aria-label="Example icon-button with a heart icon">
+              favorite_border
+            </mat-icon>  -->
+
+            <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+          </svg> -->
+          
+          </button>
+
         <p class="card-text">{{book.bookAuthor}}</p>
         <p class="card-text">{{book.bookPrice + ",00 RSD"}}</p>
         <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-primary" (click)="addToCart(book)" >
+                <button type="button" class="btn btn-sm btn-primary"  *ngIf="loggedUser"(click)="addToCart(book)" >
                     Add to cart
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-secondary" (click)="goToDetails('details', book.id)">View details</button>
