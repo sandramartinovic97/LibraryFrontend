@@ -16,6 +16,7 @@ export class BookEditComponent implements OnInit {
   editMode = false;
   bookForm: FormGroup;
   books: Book[];
+  
 
 
   constructor(
@@ -122,6 +123,8 @@ export class BookEditComponent implements OnInit {
               this.bookService.bookChanged.next(books);
             }
           );
+         this.onCancel();
+
         }
       );
     
@@ -135,13 +138,14 @@ export class BookEditComponent implements OnInit {
               this.bookService.bookChanged.next(books);
             }
           );
+          this.onCancel();
+
         }
        );
     }
   
     
   
-     this.onCancel();
   }
 
   onCancel(){

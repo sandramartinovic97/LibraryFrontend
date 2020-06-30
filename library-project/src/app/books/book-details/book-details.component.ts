@@ -17,7 +17,6 @@ export class BookDetailsComponent implements OnInit {
   books: Book[];
   isAdminLoggedIn: boolean;
 
-
   constructor(private bookService: BookService,
               private route: ActivatedRoute,
               private router: Router,
@@ -32,6 +31,7 @@ export class BookDetailsComponent implements OnInit {
         this.book = book;
       });
     });
+
     this.userService.getLoggedInUser().subscribe( user =>
       {
         if(user != null) {

@@ -1,12 +1,14 @@
-<div class="card mb-4 box-shadow" style='text-align:center;'>
+<div class="row card mb-4 box-shadow" style='text-align:center;'>
+  <div class="col-md-4" style="margin-top: 50px;">  
     <img class="card-img-top imgSize" style="margin-bottom: 20px;" [src]="book?.bookCover" height="100%">
-    <div class="card-body">
+  </div>  
+  <div class="card-body col-md-8" style="margin-top: 50px;">
         <p class="card-text h1"><strong>{{book?.bookName}}</strong></p>
         <p class="card-text h4"><strong>Author: {{book?.bookAuthor}}</strong></p>
 
         <p class="card-text h3">{{book?.bookDescription}}</p>
         
-         
+        <hr>
       
           <p class="card-text h4"><strong>Publisher: {{book?.bookPublisher}}</strong></p>
           <p class="card-text h4"><strong>Language: {{book?.bookLanguage}}</strong></p>
