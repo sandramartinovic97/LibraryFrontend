@@ -4,7 +4,7 @@
         <p class="card-text" style="height: 8rem;"><strong>{{book.bookName}}</strong></p>
         <!-- <button (click)="addToFavourites(book)">Favourites</button> -->
         
-        <button class="btn btn-sm"(click)="addToFavourites(book)" *ngIf="!isAddedToFavourites">Add to favourite
+        <button class="btn btn-sm"(click)="addToFavourites(book)" [disabled]="isAddedToFavourites">Add to favourites
 <!-- 
            <mat-icon
               *ngIf="selected"

@@ -20,7 +20,7 @@ export class BookFavouritesComponent implements OnInit, OnDestroy {
   id: number;
   dataSource = new MatTableDataSource<BookFavourites>();
 
-  displayedColumns: string[] = ['bookName'];
+  displayedColumns: string[] = ['bookName', 'bookAuthor'];
 
   constructor(private bookService: BookService,
     private bookFavouritesService: BookFavouritesService,
