@@ -8,6 +8,8 @@ import { UserService } from '../../../auth/user.service';
 import { User } from '../../../auth/user.model';
 import { OrderItemService } from '../../../book-order/orderItem.service';
 import { Subscription } from 'rxjs';
+import { BookFavouritesService } from 'src/app/book-favourites/book-favourites.service';
+import { BookFavourites } from 'src/app/book-favourites/book-favourites.model';
 
 @Component({
   selector: 'app-book-item',
@@ -17,25 +19,38 @@ import { Subscription } from 'rxjs';
 export class BookItemComponent implements OnInit, OnDestroy {
   @Input() book: Book;
 
+  selected: boolean = false;
+
   // za dijalog i dodavanje orderItem
   itemQuantity: number;
   orderItemToAdd: OrderItem;
   loggedUser: User;
   subscription: Subscription;
 
+  favouriteBookToAdd: BookFavourites;
 
   constructor(private router: Router,
               public dialog: MatDialog,
               private userService: UserService,
-              private orderItemService: OrderItemService) { }
+              private orderItemService: OrderItemService,
+              private bookFavouriteService: BookFavouritesService) { }
 
   ngOnInit(): void {
     this.subscription = this.userService.user.subscribe(loggedClient => {
 
       if (loggedClient) {
         this.loggedUser = loggedClient;
+        this.bookFavouriteService.getFavouriteBookByCustomerIdAndBookId(this.loggedUser.id, this.book.id).subscribe(book=> {
+          this.selected = false;
+          console.log(this.selected);
+        }, error=> {
+          this.selected = true;
+          console.log(this.selected);
+        })
       }
     });
+
+    
   }
 
   goToDetails(pageName: string, id: number) {
@@ -59,6 +74,24 @@ export class BookItemComponent implements OnInit, OnDestroy {
             console.log(this.orderItemToAdd);
           });
         }
+      });
+    }
+  }
+
+  addToFavourites(book: Book) {
+    this.selected = !this.selected;
+    if(this.selected == true) {
+      this.favouriteBookToAdd = new BookFavourites (book, this.loggedUser);
+
+      if (this.loggedUser != null) {
+        this.favouriteBookToAdd = new BookFavourites (book, this.loggedUser);
+        this.bookFavouriteService.addFavouriteBook(this.favouriteBookToAdd).subscribe(response => {
+          console.log(this.favouriteBookToAdd);
+        });
+      }
+    } else {
+      this.bookFavouriteService.deleteFavouriteBook(this.book.id).subscribe(response => {
+        console.log(response);
       });
     }
   }

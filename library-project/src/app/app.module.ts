@@ -36,6 +36,8 @@ import { OrderItemService } from './book-order/orderItem.service';
 import { RouterModule } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { BookOrderService } from './book-order/bookOrder.service';
+import { BookFavouritesComponent } from './book-favourites/book-favourites.component';
+import { BookFavouritesService } from './book-favourites/book-favourites.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { BookOrderService } from './book-order/bookOrder.service';
     BookOrderComponent,
     OrderDialogComponent,
     BookEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    BookFavouritesComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,7 @@ import { BookOrderService } from './book-order/bookOrder.service';
     ToastrModule.forRoot(),
     MatSelectModule
   ],
-  providers: [BookService, AuthService, OrderItemService, ToastrService, BookOrderService],
+  providers: [BookService, AuthService, OrderItemService, ToastrService, BookOrderService, BookFavouritesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
