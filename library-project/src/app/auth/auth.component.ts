@@ -35,12 +35,17 @@ export class AuthComponent implements OnInit {
         this.userService.getUserByToken().subscribe(user => {
           console.log(user);
           this.userService.emitUser(user);
+          this.toastr.success("Successfully logged in!", "Success");
+
         }, error => {
-          console.log(error);
+          
+
         });
         this.router.navigate(['books']);
       }, error => {
         console.log(error);
+        this.toastr.error("Wrong credentials", "Error");
+
       });
       form.reset();
     } else {

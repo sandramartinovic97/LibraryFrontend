@@ -8,6 +8,7 @@ import { UserService } from '../../../auth/user.service';
 import { User } from '../../../auth/user.model';
 import { OrderItemService } from '../../../book-order/orderItem.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-item',
@@ -27,7 +28,8 @@ export class BookItemComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
               public dialog: MatDialog,
               private userService: UserService,
-              private orderItemService: OrderItemService) { }
+              private orderItemService: OrderItemService,
+              private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.subscription = this.userService.user.subscribe(loggedClient => {
@@ -57,6 +59,7 @@ export class BookItemComponent implements OnInit, OnDestroy {
           this.orderItemToAdd = new OrderItem (null, book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, this.loggedUser.id);
           this.orderItemService.addOrderItem(this.orderItemToAdd).subscribe(response => {
             console.log(this.orderItemToAdd);
+            this.toastrService.success("Successfully added to cart", "Success");
           });
         }
       });
