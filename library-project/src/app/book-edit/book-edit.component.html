@@ -3,13 +3,6 @@
       <form [formGroup] = "bookForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-xs-12">
-            <button type="submit" class="btn btn-success" [disabled]="!bookForm.valid"> Save</button>
-            <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-xs-12">
             <div class="form-group">
               <label for="name">Book Title</label>
               <input
@@ -125,6 +118,14 @@
             </div>
           </div>
         </div>
+        <hr>
+        <div class="row" style="margin-bottom: 20px; text-align:center">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-success btn-lg" [disabled]="!bookForm.valid"> Save</button>
+            <button type="button" class="btn btn-danger btn-lg" (click)="onCancel()">Cancel</button>
+          </div>
+        </div>
+        
     </form>
 </div>
 </div>

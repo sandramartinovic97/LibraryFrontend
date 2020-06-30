@@ -10,6 +10,7 @@ import { OrderItemService } from '../../../book-order/orderItem.service';
 import { Subscription } from 'rxjs';
 import { BookFavouritesService } from 'src/app/book-favourites/book-favourites.service';
 import { BookFavourites } from 'src/app/book-favourites/book-favourites.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-item',
@@ -18,6 +19,7 @@ import { BookFavourites } from 'src/app/book-favourites/book-favourites.model';
 })
 export class BookItemComponent implements OnInit, OnDestroy {
   @Input() book: Book;
+  isUserLoggedIn: boolean;
 
   selected: boolean = false;
 
@@ -33,11 +35,12 @@ export class BookItemComponent implements OnInit, OnDestroy {
               public dialog: MatDialog,
               private userService: UserService,
               private orderItemService: OrderItemService,
-              private bookFavouriteService: BookFavouritesService) { }
+              private bookFavouriteService: BookFavouritesService,
+              private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.subscription = this.userService.user.subscribe(loggedClient => {
-
+      
       if (loggedClient) {
         this.loggedUser = loggedClient;
         this.bookFavouriteService.getFavouriteBookByCustomerIdAndBookId(this.loggedUser.id, this.book.id).subscribe(book=> {
@@ -72,6 +75,7 @@ export class BookItemComponent implements OnInit, OnDestroy {
           this.orderItemToAdd = new OrderItem (null, book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, this.loggedUser.id);
           this.orderItemService.addOrderItem(this.orderItemToAdd).subscribe(response => {
             console.log(this.orderItemToAdd);
+            this.toastrService.success("Successfully added to cart", "Success");
           });
         }
       });

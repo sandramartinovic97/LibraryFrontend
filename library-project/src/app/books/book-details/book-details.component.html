@@ -1,22 +1,30 @@
 <div class="card mb-4 box-shadow" style='text-align:center;'>
-    <img class="card-img-top" [src]="book?.bookCover" height="100%">
+    <img class="card-img-top imgSize" style="margin-bottom: 20px;" [src]="book?.bookCover" height="100%">
     <div class="card-body">
-        <p class="card-text"><strong>{{book?.bookName}}</strong></p>
-        <p class="card-text">{{book?.bookDescription}}</p>
-        
-            <div class="btn-group" appDropdown>
+        <p class="card-text h1"><strong>{{book?.bookName}}</strong></p>
+        <p class="card-text h4"><strong>Author: {{book?.bookAuthor}}</strong></p>
 
-                <button
-                  type="button"
-                  class="btn btn-primary dropdown-toggle">
-                  Manage <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a style="cursor: pointer;" (click)="onEditBook()">Edit book</a></li>
-                  <li><a style="cursor: pointer;" (click)="onDeleteBook()">Delete book</a></li>
-                </ul>
-            </div>
+        <p class="card-text h3">{{book?.bookDescription}}</p>
+        
+         
       
+          <p class="card-text h4"><strong>Publisher: {{book?.bookPublisher}}</strong></p>
+          <p class="card-text h4"><strong>Language: {{book?.bookLanguage}}</strong></p>
+          <p class="card-text h4"><strong>Year: {{book?.bookYear}}</strong></p>
+          <p class="card-text h3" style="color:  red;"><strong>Price: {{book?.bookPrice + ",00 RSD"}}</strong></p>
+
+          <div class="btn-group" style="margin-bottom: 70px;" appDropdown>
+
+            <button
+              type="button" *ngIf = "isAdminLoggedIn" 
+              class="btn btn-primary dropdown-toggle">
+              Manage <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a style="cursor: pointer;" (click)="onEditBook()">Edit book</a></li>
+              <li><a style="cursor: pointer;" (click)="onDeleteBook()">Delete book</a></li>
+            </ul>
+        </div>
 
         <router-outlet></router-outlet>
     </div>

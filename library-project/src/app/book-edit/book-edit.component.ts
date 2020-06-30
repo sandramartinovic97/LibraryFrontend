@@ -17,6 +17,7 @@ export class BookEditComponent implements OnInit {
   bookForm: FormGroup;
   books: Book[];
 
+
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
@@ -37,6 +38,7 @@ export class BookEditComponent implements OnInit {
 
       }
     );
+
   }
   private initForm() {
 
@@ -113,19 +115,31 @@ export class BookEditComponent implements OnInit {
       this.bookForm.value.imageURL
     );
     if (this.editMode) {
-      this.bookService.updateBook(this.id, newBook).subscribe();
+      this.bookService.updateBook(this.id, newBook).subscribe(
+        a => {
+          this.bookService.fetchBooks().subscribe(
+            (books: Book[]) => {
+              this.bookService.bookChanged.next(books);
+            }
+          );
+        }
+      );
     
  
     } else {
        console.log(newBook);
-       this.bookService.addBook(newBook).subscribe();
+       this.bookService.addBook(newBook).subscribe(
+        a => {
+          this.bookService.fetchBooks().subscribe(
+            (books: Book[]) => {
+              this.bookService.bookChanged.next(books);
+            }
+          );
+        }
+       );
     }
-    this.bookService.fetchBooks().subscribe(
-      (books: Book[]) => {
-        this.books = books;
-      }
-    );
-     this.bookService.bookChanged.next(this.books);
+  
+    
   
      this.onCancel();
   }
