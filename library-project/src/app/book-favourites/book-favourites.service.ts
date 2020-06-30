@@ -40,7 +40,7 @@ export class BookFavouritesService {
         httpParams.set("customerId", customerId.toString());
         httpParams.set("bookId", bookId.toString());
         if (token != null) {
-            return this.httpClient.get<BookFavourites>('http://localhost:8083/favouritebook/getFavouriteByCustomerAndBook', { headers: new HttpHeaders().set('Authorization', token), params: httpParams })
+            return this.httpClient.get<BookFavourites>('http://localhost:8083/favouritebook/getFavouriteByCustomerAndBook?'+"customerId=" + customerId + "&bookId=" + bookId, { headers: new HttpHeaders().set('Authorization', token)})
         }
     }
 }

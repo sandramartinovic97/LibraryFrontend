@@ -21,7 +21,7 @@ export class BookItemComponent implements OnInit, OnDestroy {
   @Input() book: Book;
   isUserLoggedIn: boolean;
 
-  selected: boolean = false;
+  isAddedToFavourites: boolean = true;
 
   // za dijalog i dodavanje orderItem
   itemQuantity: number;
@@ -32,28 +32,28 @@ export class BookItemComponent implements OnInit, OnDestroy {
   favouriteBookToAdd: BookFavourites;
 
   constructor(private router: Router,
-              public dialog: MatDialog,
-              private userService: UserService,
-              private orderItemService: OrderItemService,
-              private bookFavouriteService: BookFavouritesService,
-              private toastrService: ToastrService) { }
+    public dialog: MatDialog,
+    private userService: UserService,
+    private orderItemService: OrderItemService,
+    private bookFavouriteService: BookFavouritesService,
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.subscription = this.userService.user.subscribe(loggedClient => {
-      
+
       if (loggedClient) {
         this.loggedUser = loggedClient;
-        this.bookFavouriteService.getFavouriteBookByCustomerIdAndBookId(this.loggedUser.id, this.book.id).subscribe(book=> {
-          this.selected = false;
-          console.log(this.selected);
-        }, error=> {
-          this.selected = true;
-          console.log(this.selected);
+        this.bookFavouriteService.getFavouriteBookByCustomerIdAndBookId(this.loggedUser.id, this.book.id).subscribe(book => {
+          this.isAddedToFavourites = true;
+          console.log(this.isAddedToFavourites);
+        }, error => {
+          this.isAddedToFavourites = false;
+          console.log(this.isAddedToFavourites);
         })
       }
     });
 
-    
+
   }
 
   goToDetails(pageName: string, id: number) {
@@ -65,14 +65,14 @@ export class BookItemComponent implements OnInit, OnDestroy {
 
       const dialogRef = this.dialog.open(OrderDialogComponent, {
         width: '250px',
-        data: {itemQuantity: this.itemQuantity}
+        data: { itemQuantity: this.itemQuantity }
       });
 
       dialogRef.afterClosed().subscribe(itemQuantityDialog => {
         this.itemQuantity = itemQuantityDialog;
 
         if (this.loggedUser != null && this.itemQuantity != null) {
-          this.orderItemToAdd = new OrderItem (null, book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, this.loggedUser.id);
+          this.orderItemToAdd = new OrderItem(null, book, book.bookPrice * itemQuantityDialog, itemQuantityDialog, this.loggedUser.id);
           this.orderItemService.addOrderItem(this.orderItemToAdd).subscribe(response => {
             console.log(this.orderItemToAdd);
             this.toastrService.success("Successfully added to cart", "Success");
@@ -83,21 +83,14 @@ export class BookItemComponent implements OnInit, OnDestroy {
   }
 
   addToFavourites(book: Book) {
-    this.selected = !this.selected;
-    if(this.selected == true) {
-      this.favouriteBookToAdd = new BookFavourites (book, this.loggedUser);
-
-      if (this.loggedUser != null) {
-        this.favouriteBookToAdd = new BookFavourites (book, this.loggedUser);
-        this.bookFavouriteService.addFavouriteBook(this.favouriteBookToAdd).subscribe(response => {
-          console.log(this.favouriteBookToAdd);
-        });
-      }
-    } else {
-      this.bookFavouriteService.deleteFavouriteBook(this.book.id).subscribe(response => {
-        console.log(response);
+    this.isAddedToFavourites = !this.isAddedToFavourites;
+    if (this.loggedUser != null) {
+      this.favouriteBookToAdd = new BookFavourites(book, this.loggedUser);
+      this.bookFavouriteService.addFavouriteBook(this.favouriteBookToAdd).subscribe(response => {
+        console.log(this.favouriteBookToAdd);
       });
     }
+
   }
 
   ngOnDestroy(): void {
