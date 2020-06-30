@@ -62,11 +62,11 @@ export class BookOrderComponent implements OnInit, OnDestroy {
 
   confirmOrder() {
     // otvara se forma za popunjavanje porudzbine
-    if (this.orderItemByCustomer === []) {
-      this.toastMess.info('You do not have book in shopping cart');
+    if (Array.isArray(this.orderItemByCustomer) && this.orderItemByCustomer.length) {
+      this.createOrder = true;
     }
     else {
-      this.createOrder = true;
+      this.toastMess.info('You do not have book in shopping cart');
     }
   }
   // odustajanje od kreiranja porudzbine
@@ -78,9 +78,11 @@ export class BookOrderComponent implements OnInit, OnDestroy {
   // kreiranje porudzbine za kraj, ako ima knjiga u listi
   onSubmit(form: NgForm) {
     const value = form.value;
-
-    this.bookOrderService.addBookOrder(new BookOrder(value.date, 'U procesu', this.priceOfOrder, this.loggedUser))
+    console.log(form.value);
+    this.bookOrderService.addBookOrder(new BookOrder(value.toDate, 'U procesu', this.priceOfOrder, this.loggedUser))
       .subscribe(response => {
+
+        this.toastMess.success('Order created successfully', "Success"); 
 
         for (const orderItem of this.orderItemByCustomer) {
             orderItem.bookOrderDto = response;
@@ -94,6 +96,7 @@ export class BookOrderComponent implements OnInit, OnDestroy {
         this.orderItemByCustomer = [];
         this.priceOfOrder = 0;
         this.orderItemService.listOrderItem.next(null);
+        this.createOrder = false;
       });
   }
 
